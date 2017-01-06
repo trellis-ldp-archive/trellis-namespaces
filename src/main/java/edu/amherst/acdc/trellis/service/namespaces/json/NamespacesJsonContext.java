@@ -29,6 +29,8 @@ import edu.amherst.acdc.trellis.spi.NamespaceService;
 import org.slf4j.Logger;
 
 /**
+ * Create a namespace service based on reading/writing the namespaces to a central JSON file.
+ *
  * @author acoburn
  */
 public class NamespacesJsonContext implements NamespaceService {
