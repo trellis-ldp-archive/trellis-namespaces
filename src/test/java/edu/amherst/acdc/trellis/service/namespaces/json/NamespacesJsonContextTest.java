@@ -44,7 +44,7 @@ public class NamespacesJsonContextTest {
     @Test
     public void testWriteToJson() {
         final File file = new File(NamespacesJsonContext.class.getResource(nsDoc).getPath());
-        final String filename = file.getParent() + randomFilename();
+        final String filename = file.getParent() + "/" + randomFilename();
         final NamespacesJsonContext svc1 = new NamespacesJsonContext(filename);
         assertEquals(0, svc1.getNamespaces().size());
         svc1.setNamespace(ldpPrefix, ldpNs);
@@ -59,6 +59,6 @@ public class NamespacesJsonContextTest {
     private static String randomFilename() {
         final SecureRandom random = new SecureRandom();
         final String filename = new BigInteger(50, random).toString(32);
-        return "/" + filename + ".json";
+        return filename + ".json";
     }
 }
