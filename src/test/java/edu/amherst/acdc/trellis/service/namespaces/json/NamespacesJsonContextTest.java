@@ -49,14 +49,14 @@ public class NamespacesJsonContextTest {
         final String filename = file.getParent() + "/" + randomFilename();
         final NamespacesJsonContext svc1 = new NamespacesJsonContext(filename);
         assertEquals(13, svc1.getNamespaces().size());
-        assertNull(svc1.getNamespace("json"));
-        svc1.setNamespace("json", JSONLD);
+        assertNull(svc1.getNamespace("jsonld"));
+        svc1.setNamespace("jsonld", JSONLD);
         assertEquals(14, svc1.getNamespaces().size());
-        assertEquals(JSONLD, svc1.getNamespace("json"));
+        assertEquals(JSONLD, svc1.getNamespace("jsonld"));
 
         final NamespacesJsonContext svc2 = new NamespacesJsonContext(filename);
         assertEquals(14, svc2.getNamespaces().size());
-        assertEquals(JSONLD, svc2.getNamespace("json"));
+        assertEquals(JSONLD, svc2.getNamespace("jsonld"));
     }
 
     private static String randomFilename() {

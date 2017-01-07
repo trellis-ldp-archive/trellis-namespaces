@@ -99,7 +99,7 @@ public class NamespacesJsonContext implements NamespaceService {
 
     private static void write(final String filePath, final Map<String, String> data) {
         try {
-            mapper.writeValue(new File(filePath), data);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), data);
         } catch (final Exception ex) {
             LOGGER.error("Error writing JSON: {}", ex.getMessage());
         }
