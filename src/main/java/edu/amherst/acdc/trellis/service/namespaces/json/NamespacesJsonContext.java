@@ -17,11 +17,13 @@ package edu.amherst.acdc.trellis.service.namespaces.json;
 
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
+import static java.util.Optional.ofNullable;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -40,6 +42,7 @@ public class NamespacesJsonContext implements NamespaceService {
     private final static ObjectMapper mapper = new ObjectMapper();
     private final String filePath;
     private final Map<String, String> data;
+    private final Map<String, String> dataRev = new HashMap<>();
 
     /**
      * Create a JSON-based Namespace service
@@ -56,6 +59,7 @@ public class NamespacesJsonContext implements NamespaceService {
                 write(filePath, data);
             }
         }
+        data.entrySet().forEach(e -> dataRev.put(e.getValue(), e.getKey()));
     }
 
     @Override
@@ -64,17 +68,29 @@ public class NamespacesJsonContext implements NamespaceService {
     }
 
     @Override
-    public String getNamespace(final String prefix) {
-        return data.get(prefix);
+    public Optional<String> getNamespace(final String prefix) {
+        return ofNullable(data.get(prefix));
     }
 
     @Override
-    public void setNamespace(final String prefix, final String namespace) {
+    public Optional<String> getPrefix(final String namespace) {
+        return ofNullable(dataRev.get(namespace));
+    }
+
+    @Override
+    public Boolean setPrefix(final String prefix, final String namespace) {
         requireNonNull(prefix, "The prefix value may not be null!");
         requireNonNull(namespace, "The namespce value may not be null!");
 
+        if (dataRev.containsKey(namespace)) {
+            LOGGER.warn("A prefix already exists for the namespace: {}", namespace);
+            return false;
+        }
+
         data.put(prefix, namespace);
+        dataRev.put(namespace, prefix);
         write(filePath, data);
+        return true;
     }
 
     private static Map<String, String> read(final String filePath) {

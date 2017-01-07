@@ -16,7 +16,7 @@
 package edu.amherst.acdc.trellis.service.namespaces.json;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertFalse;
 
 import java.io.File;
 import java.math.BigInteger;
@@ -40,7 +40,8 @@ public class NamespacesJsonContextTest {
         final URL res = NamespacesJsonContext.class.getResource(nsDoc);
         final NamespacesJsonContext svc = new NamespacesJsonContext(res.getPath());
         assertEquals(2, svc.getNamespaces().size());
-        assertEquals(LDP, svc.getNamespace("ldp"));
+        assertEquals(LDP, svc.getNamespace("ldp").get());
+        assertEquals("ldp", svc.getPrefix(LDP).get());
     }
 
     @Test
@@ -49,14 +50,16 @@ public class NamespacesJsonContextTest {
         final String filename = file.getParent() + "/" + randomFilename();
         final NamespacesJsonContext svc1 = new NamespacesJsonContext(filename);
         assertEquals(13, svc1.getNamespaces().size());
-        assertNull(svc1.getNamespace("jsonld"));
-        svc1.setNamespace("jsonld", JSONLD);
+        assertFalse(svc1.getNamespace("jsonld").isPresent());
+        assertFalse(svc1.getPrefix(JSONLD).isPresent());
+        svc1.setPrefix("jsonld", JSONLD);
         assertEquals(14, svc1.getNamespaces().size());
-        assertEquals(JSONLD, svc1.getNamespace("jsonld"));
+        assertEquals(JSONLD, svc1.getNamespace("jsonld").get());
+        assertEquals("jsonld", svc1.getPrefix(JSONLD).get());
 
         final NamespacesJsonContext svc2 = new NamespacesJsonContext(filename);
         assertEquals(14, svc2.getNamespaces().size());
-        assertEquals(JSONLD, svc2.getNamespace("jsonld"));
+        assertEquals(JSONLD, svc2.getNamespace("jsonld").get());
     }
 
     private static String randomFilename() {
