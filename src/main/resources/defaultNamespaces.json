@@ -3,7 +3,6 @@
     "as" : "https://www.w3.org/ns/activitystreams#",
     "dc" : "http://purl.org/dc/terms/",
     "dc11" : "http://purl.org/dc/elements/1.1/",
-    "fedora" : "http://fedora.info/definitions/v4/repository#",
     "geo" : "http://www.w3.org/2003/01/geo/wgs84_pos#",
     "ldp" : "http://www.w3.org/ns/ldp#",
     "owl" : "http://www.w3.org/2002/07/owl#",
