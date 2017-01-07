@@ -16,6 +16,7 @@
 package edu.amherst.acdc.trellis.service.namespaces.json;
 
 import static java.util.Collections.unmodifiableMap;
+import static java.util.Objects.requireNonNull;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.File;
@@ -45,6 +46,8 @@ public class NamespacesJsonContext implements NamespaceService {
      * @param filePath the file path
      */
     public NamespacesJsonContext(final String filePath) {
+        requireNonNull(filePath, "The filePath may not be null!");
+
         this.filePath = filePath;
         data = read(filePath);
         if (data.isEmpty()) {
@@ -67,6 +70,9 @@ public class NamespacesJsonContext implements NamespaceService {
 
     @Override
     public void setNamespace(final String prefix, final String namespace) {
+        requireNonNull(prefix, "The prefix value may not be null!");
+        requireNonNull(namespace, "The namespce value may not be null!");
+
         data.put(prefix, namespace);
         write(filePath, data);
     }
