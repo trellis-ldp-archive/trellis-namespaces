@@ -25,7 +25,6 @@ import java.util.Map;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import edu.amherst.acdc.trellis.spi.NamespaceService;
-
 import org.slf4j.Logger;
 
 /**
@@ -47,7 +46,13 @@ public class NamespacesJsonContext implements NamespaceService {
      */
     public NamespacesJsonContext(final String filePath) {
         this.filePath = filePath;
-        this.data = read(filePath);
+        data = read(filePath);
+        if (data.isEmpty()) {
+            data.putAll(read(getClass().getResource("/defaultNamespaces.json").getPath()));
+            if (!data.isEmpty()) {
+                write(filePath, data);
+            }
+        }
     }
 
     @Override

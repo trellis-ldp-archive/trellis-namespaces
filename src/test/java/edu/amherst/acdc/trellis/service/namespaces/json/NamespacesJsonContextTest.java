@@ -16,6 +16,7 @@
 package edu.amherst.acdc.trellis.service.namespaces.json;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.io.File;
 import java.math.BigInteger;
@@ -30,15 +31,16 @@ import org.junit.Test;
 public class NamespacesJsonContextTest {
 
     private static final String nsDoc = "/testNamespaces.json";
-    private static final String ldpNs = "http://www.w3.org/ns/ldp#";
-    private static final String ldpPrefix = "ldp";
+    private static final String JSONLD = "http://www.w3.org/ns/json-ld#";
+    private static final String LDP = "http://www.w3.org/ns/ldp#";
+
 
     @Test
     public void testReadFromJson() {
         final URL res = NamespacesJsonContext.class.getResource(nsDoc);
         final NamespacesJsonContext svc = new NamespacesJsonContext(res.getPath());
         assertEquals(2, svc.getNamespaces().size());
-        assertEquals(ldpNs, svc.getNamespace(ldpPrefix));
+        assertEquals(LDP, svc.getNamespace("ldp"));
     }
 
     @Test
@@ -46,14 +48,15 @@ public class NamespacesJsonContextTest {
         final File file = new File(NamespacesJsonContext.class.getResource(nsDoc).getPath());
         final String filename = file.getParent() + "/" + randomFilename();
         final NamespacesJsonContext svc1 = new NamespacesJsonContext(filename);
-        assertEquals(0, svc1.getNamespaces().size());
-        svc1.setNamespace(ldpPrefix, ldpNs);
-        assertEquals(1, svc1.getNamespaces().size());
-        assertEquals(ldpNs, svc1.getNamespace(ldpPrefix));
+        assertEquals(14, svc1.getNamespaces().size());
+        assertNull(svc1.getNamespace("json"));
+        svc1.setNamespace("json", JSONLD);
+        assertEquals(15, svc1.getNamespaces().size());
+        assertEquals(JSONLD, svc1.getNamespace("json"));
 
         final NamespacesJsonContext svc2 = new NamespacesJsonContext(filename);
-        assertEquals(1, svc2.getNamespaces().size());
-        assertEquals(ldpNs, svc2.getNamespace(ldpPrefix));
+        assertEquals(15, svc2.getNamespaces().size());
+        assertEquals(JSONLD, svc2.getNamespace("json"));
     }
 
     private static String randomFilename() {
