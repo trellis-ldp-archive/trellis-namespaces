@@ -21,4 +21,4 @@
  *
  * @author acoburn
  */
-package edu.amherst.acdc.trellis.service.namespaces.json;
+package edu.amherst.acdc.trellis.namespaces;

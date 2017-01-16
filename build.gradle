@@ -82,7 +82,7 @@ jar {
         license project.license
 
         instruction 'Import-Package', '*'
-        instruction 'Export-Package', "edu.amherst.acdc.trellis.service.id;version=${projectOsgiVersion}"
+        instruction 'Export-Package', "edu.amherst.acdc.trellis.namespaces;version=${projectOsgiVersion}"
         instruction 'Require-Capability', 'osgi.extender; filter:="(osgi.extender=osgi.serviceloader.registrar)";resolution:=optional'
         instruction 'Provide-Capability', 'osgi.serviceloader; osgi.serviceloader=edu.amherst.acdc.trellis.spi.NamespaceService'
     }
