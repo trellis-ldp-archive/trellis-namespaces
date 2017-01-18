@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="trellis-service-namespaces-json-${project.version}">
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="trellis-namespaces-${project.version}">
   <repository>mvn:edu.amherst.acdc/trellis-spi/${trellisSpiVersion}/xml/features</repository>
 
-  <feature name="trellis-service-namespaces-json" version="${project.version}">
+  <feature name="trellis-namespaces" version="${project.version}">
     <details>Installs the Trellis JSON-file-based Namespace service</details>
 
     <feature>trellis-spi</feature>
 
-    <bundle>mvn:edu.amherst.acdc/trellis-service-namespaces-json/${project.version}</bundle>
+    <bundle>mvn:edu.amherst.acdc/trellis-namespaces/${project.version}</bundle>
   </feature>
 </features>

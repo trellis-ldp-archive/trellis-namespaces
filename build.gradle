@@ -190,9 +190,9 @@ uploadArchives {
             }
 
             scm {
-                connection 'scm:git:git://github.com/acoburn/trellis-service-namespaces-json.git'
-                developerConnection 'scm:git:git@github.com/acoburn/trellis-service-namespaces-json.git'
-                url 'https://github.com/acoburn/trellis-service-namespaces-json'
+                connection 'scm:git:git://github.com/acoburn/trellis-namespaces.git'
+                developerConnection 'scm:git:git@github.com/acoburn/trellis-namespaces.git'
+                url 'https://github.com/acoburn/trellis-namespaces'
                 tag 'HEAD'
             }
 
@@ -227,7 +227,7 @@ checkstyle {
 sonarqube {
     properties {
         property "sonar.projectName", "Amherst College Trellis Repository Namespace Service"
-        property "sonar.projectKey", "edu.amherst.acdc:trellis-service-namespaces-json"
+        property "sonar.projectKey", "edu.amherst.acdc:trellis-namespaces"
     }
 }
 

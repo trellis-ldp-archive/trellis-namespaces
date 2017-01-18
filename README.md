@@ -1,6 +1,6 @@
-# trellis-service-namespaces-json
+# trellis-namespaces
 
-[![Build Status](https://travis-ci.org/acoburn/trellis-service-namespaces-json.png?branch=master)](https://travis-ci.org/acoburn/trellis-service-namespaces-json)
+[![Build Status](https://travis-ci.org/acoburn/trellis-namespaces.png?branch=master)](https://travis-ci.org/acoburn/trellis-namespaces)
 
 A namespace service for a trellis repository.
 
