@@ -190,9 +190,9 @@ uploadArchives {
             }
 
             scm {
-                connection 'scm:git:git://github.com/acoburn/trellis-namespaces.git'
-                developerConnection 'scm:git:git@github.com/acoburn/trellis-namespaces.git'
-                url 'https://github.com/acoburn/trellis-namespaces'
+                connection 'scm:git:git://github.com/trellis-ldp/trellis-namespaces.git'
+                developerConnection 'scm:git:git@github.com/trellis-ldp/trellis-namespaces.git'
+                url 'https://github.com/trellis-ldp/trellis-namespaces'
                 tag 'HEAD'
             }
 
