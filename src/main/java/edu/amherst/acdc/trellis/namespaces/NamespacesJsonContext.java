@@ -39,7 +39,7 @@ public class NamespacesJsonContext implements NamespaceService {
 
     private static final Logger LOGGER = getLogger(NamespacesJsonContext.class);
 
-    private final static ObjectMapper mapper = new ObjectMapper();
+    private static final ObjectMapper mapper = new ObjectMapper();
     private final String filePath;
     private final Map<String, String> data;
     private final Map<String, String> dataRev = new HashMap<>();
