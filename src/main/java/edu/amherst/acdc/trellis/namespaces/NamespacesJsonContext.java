@@ -17,10 +17,13 @@ package edu.amherst.acdc.trellis.namespaces;
 
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
+import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -38,8 +41,8 @@ import org.slf4j.Logger;
 public class NamespacesJsonContext implements NamespaceService {
 
     private static final Logger LOGGER = getLogger(NamespacesJsonContext.class);
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    private static final ObjectMapper mapper = new ObjectMapper();
     private final String filePath;
     private final Map<String, String> data;
     private final Map<String, String> dataRev = new HashMap<>();
@@ -52,14 +55,8 @@ public class NamespacesJsonContext implements NamespaceService {
         requireNonNull(filePath, "The filePath may not be null!");
 
         this.filePath = filePath;
-        data = read(filePath);
-        if (data.isEmpty()) {
-            data.putAll(read(getClass().getResource("/defaultNamespaces.json").getPath()));
-            if (!data.isEmpty()) {
-                write(filePath, data);
-            }
-        }
-        data.entrySet().forEach(e -> dataRev.put(e.getValue(), e.getKey()));
+        this.data = read(filePath);
+        init();
     }
 
     @Override
@@ -93,21 +90,30 @@ public class NamespacesJsonContext implements NamespaceService {
         return true;
     }
 
+    private void init() {
+        if (data.isEmpty()) {
+            data.putAll(read(getClass().getResource("/defaultNamespaces.json").getPath()));
+            if (!data.isEmpty()) {
+                write(filePath, data);
+            }
+        }
+        data.entrySet().forEach(e -> dataRev.put(e.getValue(), e.getKey()));
+    }
+
     private static Map<String, String> read(final String filePath) {
         final File file = new File(filePath);
         final Map<String, String> namespaces = new HashMap<>();
         if (file.exists()) {
             try {
-                final JsonNode json = mapper.readTree(new File(filePath));
-                if (json.isObject()) {
+                of(MAPPER.readTree(new File(filePath))).filter(JsonNode::isObject).ifPresent(json -> {
                     json.fields().forEachRemaining(node -> {
                         if (node.getValue().isTextual()) {
                             namespaces.put(node.getKey(), node.getValue().textValue());
                         }
                     });
-                }
-            } catch (final Exception ex) {
-                LOGGER.error("Error reading from JSON: {}", ex.getMessage());
+                });
+            } catch (final IOException ex) {
+                throw new UncheckedIOException(ex);
             }
         }
         return namespaces;
@@ -115,9 +121,9 @@ public class NamespacesJsonContext implements NamespaceService {
 
     private static void write(final String filePath, final Map<String, String> data) {
         try {
-            mapper.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), data);
-        } catch (final Exception ex) {
-            LOGGER.error("Error writing JSON: {}", ex.getMessage());
+            MAPPER.writerWithDefaultPrettyPrinter().writeValue(new File(filePath), data);
+        } catch (final IOException ex) {
+            throw new UncheckedIOException(ex);
         }
     }
 }
