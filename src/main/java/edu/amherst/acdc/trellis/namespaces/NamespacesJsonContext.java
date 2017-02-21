@@ -21,6 +21,11 @@ import static java.util.Optional.of;
 import static java.util.Optional.ofNullable;
 import static org.slf4j.LoggerFactory.getLogger;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.amherst.acdc.trellis.spi.NamespaceService;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -28,9 +33,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import edu.amherst.acdc.trellis.spi.NamespaceService;
 import org.slf4j.Logger;
 
 /**
