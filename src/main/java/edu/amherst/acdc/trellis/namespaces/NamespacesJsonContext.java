@@ -92,11 +92,6 @@ public class NamespacesJsonContext implements NamespaceService {
         return true;
     }
 
-    @Override
-    public void close() {
-        // no-op
-    }
-
     private void init() {
         if (data.isEmpty()) {
             data.putAll(read(getClass().getResource("/defaultNamespaces.json").getPath()));
