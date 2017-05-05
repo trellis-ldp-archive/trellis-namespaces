@@ -1,6 +1,4 @@
 /*
- * Copyright Amherst College
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package edu.amherst.acdc.trellis.namespaces;
+package org.trellisldp.namespaces;
 
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Objects.requireNonNull;
@@ -24,7 +22,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import edu.amherst.acdc.trellis.spi.NamespaceService;
+import org.trellisldp.spi.NamespaceService;
 
 import java.io.File;
 import java.io.IOException;
