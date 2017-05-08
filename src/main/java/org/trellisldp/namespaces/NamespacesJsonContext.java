@@ -22,8 +22,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import org.trellisldp.spi.NamespaceService;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -32,6 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
+import org.trellisldp.spi.NamespaceService;
 
 /**
  * Create a namespace service based on reading/writing the namespaces to a central JSON file.
