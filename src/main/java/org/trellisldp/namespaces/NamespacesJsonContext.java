@@ -92,9 +92,7 @@ public class NamespacesJsonContext implements NamespaceService {
     private void init() {
         if (data.isEmpty()) {
             data.putAll(read(getClass().getResource("/defaultNamespaces.json").getPath()));
-            if (!data.isEmpty()) {
-                write(filePath, data);
-            }
+            write(filePath, data);
         }
         data.entrySet().forEach(e -> dataRev.put(e.getValue(), e.getKey()));
     }

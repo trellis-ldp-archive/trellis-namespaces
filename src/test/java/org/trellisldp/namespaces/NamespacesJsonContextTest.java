@@ -15,6 +15,7 @@ package org.trellisldp.namespaces;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.math.BigInteger;
@@ -50,7 +51,7 @@ public class NamespacesJsonContextTest {
         assertEquals(13, svc1.getNamespaces().size());
         assertFalse(svc1.getNamespace("jsonld").isPresent());
         assertFalse(svc1.getPrefix(JSONLD).isPresent());
-        svc1.setPrefix("jsonld", JSONLD);
+        assertTrue(svc1.setPrefix("jsonld", JSONLD));
         assertEquals(14, svc1.getNamespaces().size());
         assertEquals(JSONLD, svc1.getNamespace("jsonld").get());
         assertEquals("jsonld", svc1.getPrefix(JSONLD).get());
@@ -58,6 +59,7 @@ public class NamespacesJsonContextTest {
         final NamespacesJsonContext svc2 = new NamespacesJsonContext(filename);
         assertEquals(14, svc2.getNamespaces().size());
         assertEquals(JSONLD, svc2.getNamespace("jsonld").get());
+        assertFalse(svc2.setPrefix("jsonld", JSONLD));
     }
 
     private static String randomFilename() {
