@@ -30,7 +30,7 @@ ext {
 
     /* Dependencies */
     trellisSpiVersion = '0.1.0-SNAPSHOT'
-    jacksonVersion = '2.8.9'
+    jacksonVersion = '2.9.0'
     slf4jVersion = '1.7.25'
 
     /* Testing */
