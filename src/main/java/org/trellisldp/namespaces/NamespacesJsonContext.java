@@ -102,13 +102,12 @@ public class NamespacesJsonContext implements NamespaceService {
         final Map<String, String> namespaces = new HashMap<>();
         if (file.exists()) {
             try {
-                of(MAPPER.readTree(new File(filePath))).filter(JsonNode::isObject).ifPresent(json -> {
+                of(MAPPER.readTree(new File(filePath))).filter(JsonNode::isObject).ifPresent(json ->
                     json.fields().forEachRemaining(node -> {
                         if (node.getValue().isTextual()) {
                             namespaces.put(node.getKey(), node.getValue().textValue());
                         }
-                    });
-                });
+                    }));
             } catch (final IOException ex) {
                 throw new UncheckedIOException(ex);
             }
