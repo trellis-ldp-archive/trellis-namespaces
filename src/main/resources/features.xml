@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="trellis-namespaces-${project.version}">
-  <repository>mvn:org.trellisldp/trellis-spi/${trellisSpiVersion}/xml/features</repository>
+  <repository>mvn:org.trellisldp/trellis-api/${trellisApiVersion}/xml/features</repository>
 
   <feature name="trellis-namespaces" version="${project.version}">
     <details>Installs the Trellis JSON-file-based Namespace service</details>
 
-    <feature>trellis-spi</feature>
+    <feature>trellis-api</feature>
 
     <bundle>mvn:org.trellisldp/trellis-namespaces/${project.version}</bundle>
   </feature>

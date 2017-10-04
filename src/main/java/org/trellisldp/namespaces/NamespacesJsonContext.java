@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
-import org.trellisldp.spi.NamespaceService;
+import org.trellisldp.api.NamespaceService;
 
 /**
  * Create a namespace service based on reading/writing the namespaces to a central JSON file.
