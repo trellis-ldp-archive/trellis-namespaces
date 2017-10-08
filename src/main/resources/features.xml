@@ -1,11 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.4.0" name="trellis-namespaces-${project.version}">
-  <repository>mvn:org.trellisldp/trellis-api/${trellisApiVersion}/xml/features</repository>
-
   <feature name="trellis-namespaces" version="${project.version}">
     <details>Installs the Trellis JSON-file-based Namespace service</details>
 
-    <feature>trellis-api</feature>
+    <feature version="${trellisApiVersionRange}">trellis-api</feature>
 
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-core/${jacksonVersion}</bundle>
     <bundle dependency="true">mvn:com.fasterxml.jackson.core/jackson-databind/${jacksonVersion}</bundle>
