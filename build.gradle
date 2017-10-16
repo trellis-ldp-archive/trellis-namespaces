@@ -35,7 +35,7 @@ ext {
     slf4jVersion = '1.7.25'
 
     /* Testing */
-    junitVersion = '4.12'
+    junitVersion = '4.12.1'
     logbackVersion = '1.2.3'
     jacocoVersion = "0.7.9"
 
@@ -55,7 +55,7 @@ dependencies {
     implementation group: 'org.slf4j', name: 'slf4j-api', version: slf4jVersion
 
     testImplementation group: 'ch.qos.logback', name: 'logback-classic', version: logbackVersion
-    testImplementation group: 'junit', name: 'junit', version: junitVersion
+    testImplementation group: 'org.junit.vintage', name: 'junit-vintage-engine', version: junitVersion
 
     buildToolsConfig 'org.trellisldp:trellis-build-tools:0.2.0'
 }
