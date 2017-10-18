@@ -25,9 +25,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.trellisldp.api.NamespaceService;
@@ -44,7 +44,7 @@ public class NamespacesJsonContext implements NamespaceService {
 
     private final String filePath;
     private final Map<String, String> data;
-    private final Map<String, String> dataRev = new HashMap<>();
+    private final Map<String, String> dataRev = new ConcurrentHashMap<>();
 
     /**
      * Create a JSON-based Namespace service
@@ -99,7 +99,7 @@ public class NamespacesJsonContext implements NamespaceService {
 
     private static Map<String, String> read(final String filePath) {
         final File file = new File(filePath);
-        final Map<String, String> namespaces = new HashMap<>();
+        final Map<String, String> namespaces = new ConcurrentHashMap<>();
         if (file.exists()) {
             try {
                 of(MAPPER.readTree(new File(filePath))).filter(JsonNode::isObject).ifPresent(json ->
